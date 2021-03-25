@@ -18,31 +18,34 @@
         if(regExVowel.test(s[i])) {
             if(s[i].charCodeAt(0) <= 100) {
                 charIndex = 122 - 4 - (s[i].charCodeAt(0) - 97);
+                if(charIndex === 101 || charIndex === 111) charIndex = s[i].charCodeAt(0);
+                    let temp = String.fromCharCode(charIndex);
+                    s.splice(i, 1, temp);
+            } else {
+                charIndex = (s[i] === 'o') ? s[i].charCodeAt(0) - 1 : s[i].charCodeAt(0) - 4;
+                if(charIndex === 101 || charIndex === 111) charIndex = s[i].charCodeAt(0);
+                    let temp = String.fromCharCode(charIndex);
+                    s.splice(i, 1, temp);
+            }
+        } else if(regExCons.test(s[i])) {
+            if(s[i].charCodeAt(0) >= 114) {
+                charIndex = 97 + 8 - (122 - s[i].charCodeAt(0));
+                if(charIndex === 99 || charIndex === 100) charIndex = s[i].charCodeAt(0);
                 let temp = String.fromCharCode(charIndex);
                 s.splice(i, 1, temp);
             } else {
-                charIndex = s[i].charCodeAt(0) - 4;
-                let temp = String.fromCharCode(charIndex);
-                s.splice(i, 1, temp);
+                charIndex = (s[i] === 'c') ? s[i].charCodeAt(0) - 1 :
+                (s[i] === 'd') ? s[i].charCodeAt(0) - 2 : s[i].charCodeAt(0) + 8;
+                    if(charIndex === 99 || charIndex === 100) charIndex = s[i].charCodeAt(0);
+                    let temp = String.fromCharCode(charIndex);
+                    s.splice(i, 1, temp);            
             }
-        } else if(regExCons.test(s[i])) {
-            charIndex = s[i].charCodeAt(0) + 8;
-            let temp = String.fromCharCode(charIndex);
-            s.splice(i, 1, temp);            
         }
     }
     return s.join('');
-
-    
-    //return 'Konsonanten: ' + regExCons.test(s);
-    //return 'Vokale: ' + regExVowel.test(s);
-/*     let test = 'a';
-    console.log(test.charCodeAt(0));
-    test = String.fromCharCode(102);
-    console.log(test); */
 }
 
 
-console.log('tabtbvba?: ' + vowelBack("testcase")); //, "tabtbvba");
+console.log('tabtbvba?: \n' + vowelBack("testcase")); //, "tabtbvba");
 /* console.log(vowelBack("codewars")); //, "bnaafvab");
 console.log(vowelBack("exampletesthere")); //, "agvvyuatabtqaaa"); */
