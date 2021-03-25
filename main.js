@@ -11,8 +11,7 @@
  */
 
  function vowelBack(s, split = s = s.split(''), charIndex = 0) {
-    let regExVowel = /[aeiou]/g,
-    regExCons = /[bcdfghjklmnpqrstvwxz]/g;
+    let regExVowel = /[aeiou]/g, regExCons = /[bcdfghjklmnpqrstvwxz]/g;
 
     for(let i = 0; i < s.length; i++) {
         if(regExVowel.test(s[i])) {
@@ -30,7 +29,7 @@
                 charIndex = 97 + 8 - (122 - s[i].charCodeAt(0));
             } else {
                 charIndex = (s[i] === 'c') ? s[i].charCodeAt(0) - 1 :
-                (s[i] === 'd') ? s[i].charCodeAt(0) - 2 : s[i].charCodeAt(0) + 8;
+                (s[i] === 'd') ? s[i].charCodeAt(0) - 2 : s[i].charCodeAt(0) + 9;
             }
             if(charIndex === 99 || charIndex === 100) charIndex = s[i].charCodeAt(0);
                 let temp = String.fromCharCode(charIndex);
@@ -40,7 +39,10 @@
     return s.join('');
 }
 
-
-console.log('tabtbvba?: \n' + vowelBack("testcase")); //, "tabtbvba");
-/* console.log(vowelBack("codewars")); //, "bnaafvab");
-console.log(vowelBack("exampletesthere")); //, "agvvyuatabtqaaa"); */
+console.log('\n');
+console.log('testcase\ntabtbvba: \n' + vowelBack("testcase")); //, "tabtbvba");
+console.log('-------------');
+console.log('codewars\nbnaafvab: \n' + vowelBack("codewars")); //, "bnaafvab");
+console.log('-------------');
+console.log('exampletesthere\nagvvyuatabtqaaa: \n' + vowelBack("exampletesthere")); //, "agvvyuatabtqaaa");
+console.log('\n');
