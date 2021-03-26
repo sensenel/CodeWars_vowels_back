@@ -11,8 +11,8 @@
  */
 
  function vowelBack(s, split = s = s.split(''), charIndex = 0) {
-    let regExVowel = /[aeiou]/g, regExCons = /[bcdfghjklmnpqrstvwxyz]/g;
-
+    let regExVowel = /[aeiou]/, regExCons = /[bcdfghjklmnpqrstvwxyz]/; // Ein Fehler war hier, die g-flag im RegEx! 
+    
     for(let i = 0; i < s.length; i++) {
         if(regExVowel.test(s[i])) {
             if(s[i].charCodeAt(0) <= 100) {
@@ -24,10 +24,12 @@
         } 
         if(regExCons.test(s[i])) {
             if(s[i].charCodeAt(0) >= 114) {
-                charIndex = 97 + 8 - (122 - s[i].charCodeAt(0));
+                let shiftForm = (97 + 8) - (122 - s[i].charCodeAt(0));
+                charIndex =  shiftForm != 99 || shiftForm != 100 ?
+                            shiftForm : s[i].charCodeAt(0);
             } else {
                 charIndex = (s[i] === 'c') ? s[i].charCodeAt(0) - 1 :
-                (s[i] === 'd') ? s[i].charCodeAt(0) - 3 : s[i].charCodeAt(0) + 9;
+                            (s[i] === 'd') ? s[i].charCodeAt(0) - 3 : s[i].charCodeAt(0) + 9;
             }
             if(charIndex === 99 || charIndex === 100) charIndex = s[i].charCodeAt(0);
         }
